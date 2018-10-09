@@ -110,7 +110,6 @@ RSpec.describe Api::V1::JobCandidatesController do
       end
 
       it 'returns job candidate details' do
-        puts "\n\nRESPONSE BODY #{response.body}\n"
         expect(json_response[:nome]).to eq(nico.name)
         expect(json_response[:profissao]).to eq(nico.career)
         expect(json_response[:localizacao]).to eq(nico.localization)
