@@ -1,6 +1,7 @@
 class EstimatesService
   def initialize
     @estimates_by_location = {}
+    load_from_link
   end
 
   def add(source, target, distance)
@@ -28,6 +29,19 @@ class EstimatesService
 
   def estimates_opened?(source)
     @estimates_by_location[source].select(&:opened?).present?
+  end
+
+  private
+
+  def load_from_link
+    Link.all.each do |link|
+      add_two_ways(link.source, link.target, link.distance)
+    end
+  end
+
+  def add_two_ways(source, target, distance)
+    add(source, target, distance)
+    add(target, source, distance)
   end
 end
 

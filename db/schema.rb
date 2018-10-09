@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_041046) do
+ActiveRecord::Schema.define(version: 2018_10_09_062346) do
 
   create_table "distance_factors", force: :cascade do |t|
     t.integer "initial"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2018_10_09_041046) do
     t.text "description"
     t.string "localization"
     t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "source"
+    t.string "target"
+    t.integer "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

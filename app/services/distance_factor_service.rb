@@ -1,5 +1,5 @@
 class DistanceFactorService
-  def initialize(best_way_service = nil)
+  def initialize(best_way_service = BestWayService.new)
     @best_way_service = best_way_service
   end
 
