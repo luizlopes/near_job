@@ -1,0 +1,8 @@
+en:
+  error_messages:
+    job_not_found:
+      title: 'Could not find job'
+      detail: 'This job does not exist'
+    validation_error:
+      title: 'Validation error'
+      detail: 'Validation errors occurred'

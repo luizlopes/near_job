@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :job do
-    company "MyString"
-    title "MyString"
-    description "MyText"
-    localization "MyString"
-    level 1
+    company 'Braz Quintal'
+    title 'Pizzaiolo Italiano'
+    description 'Fazer pizzas de verdade'
+    localization 'A'
+    level 3
   end
 end

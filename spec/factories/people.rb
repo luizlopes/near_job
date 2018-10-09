@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :person do
-    name "MyString"
-    career "MyString"
-    localization "MyString"
-    level 1
+    name 'Antonio'
+    career 'Chef Pizzaiolo'
+    localization 'B'
+    level 3
   end
 end

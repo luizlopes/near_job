@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  apipie
+  namespace :v1, module: 'api/v1' do
+    get '/vagas/:vaga_id/candidaturas/ranking', to: 'job_candidates#ranking'
+    post '/candidaturas', to: 'job_candidates#create'
+  end
 end
