@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_005729) do
+ActiveRecord::Schema.define(version: 2018_10_09_041046) do
+
+  create_table "distance_factors", force: :cascade do |t|
+    t.integer "initial"
+    t.integer "final"
+    t.integer "factor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "job_candidates", force: :cascade do |t|
     t.integer "job_id"
