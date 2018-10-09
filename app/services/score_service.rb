@@ -1,5 +1,5 @@
 class ScoreService
-  def initialize(level_factor_service = LevelFactorService.new,
+  def initialize(level_factor_service = LevelFactorService,
                  distance_factor_service = DistanceFactorService.new)
     @level_factor_service = level_factor_service
     @distance_factor_service = distance_factor_service
