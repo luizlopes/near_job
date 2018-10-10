@@ -14,7 +14,7 @@ class BestWayService
 
   def distance(source, target)
     estimate = estimates_service.find(source, target)
-    estimate.present? ? estimate[0].distance : -1
+    estimate.present? ? estimate.first.distance : -1
   end
 
   def calculate_distances_from(source)
@@ -40,7 +40,7 @@ class BestWayService
     distance = level_zero.distance + level_one.distance
     estimate = estimates_service.find(source, level_one.target)
     if estimate.present?
-      change_estimate(estimate[0], distance, level_zero.target)
+      change_estimate(estimate.first, distance, level_zero.target)
     else
       estimates_service.add_new(source, level_one.target, level_zero.target,
                                 distance)
