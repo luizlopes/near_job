@@ -3,10 +3,6 @@ module Api
     class JobCandidatesController < ApplicationController
       before_action :find_job, only: %i[ranking]
 
-      rescue_from ActiveRecord::RecordNotFound do
-        render_json_error :not_found, :job_not_found
-      end
-
       def_param_group :job_candidate_record do
         param :id_vaga, Integer, 'Id da vaga'
         param :id_pessoa, Integer, 'Id da pessoa'
@@ -22,12 +18,12 @@ module Api
       param_group :job_candidate_record
       def create
         job_candidate = JobCandidate.new(job_candidate_params)
-        unless job_candidate.save(job_candidate)
-          render_json_validation_error job_candidate, :validation_error
+        if job_candidate.save(job_candidate)
+          render json: job_candidate, status: :created,
+                 serializer: RankingSerializer
           return
         end
-        render json: job_candidate, status: :created,
-               serializer: RankingSerializer
+        render_json_validation_error job_candidate, :validation_error
       end
 
       private
@@ -37,7 +33,7 @@ module Api
       end
 
       def job_candidate_params
-        { job_id: params.require(:id_vaga), person_id: params[:id_pessoa] }
+        { job_id: params[:id_vaga], person_id: params[:id_pessoa] }
       end
     end
   end

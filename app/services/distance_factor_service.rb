@@ -6,13 +6,13 @@ class DistanceFactorService
   def call(source, target)
     lower_cost_distance = @best_way_service.find_lower_cost(source, target)
 
-    find_distance_factor_to(lower_cost_distance).factor
+    find_distance_to(lower_cost_distance).factor
   end
 
-  def find_distance_factor_to(distance)
-    distance_factor = DistanceFactor.where('(:distance >= initial '\
-                                           'AND :distance <= final)',
+  def find_distance_to(distance)
+    distance_factor = DistanceFactor.where(':distance >= initial '\
+                                           'AND :distance <= final',
                                            distance: distance)
-    distance_factor[0]
+    distance_factor.first
   end
 end
