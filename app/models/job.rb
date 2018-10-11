@@ -7,6 +7,7 @@ class Job < ApplicationRecord
   alias_attribute :localizacao, :localization
   alias_attribute :nivel, :level
 
-  validates :company, :title, :description, :localization, presence: true
+  validates :company, :title, :description, :localization, :level,
+            presence: true
   validates :level, inclusion: { in: 1..5 }
 end
