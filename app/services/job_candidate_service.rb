@@ -6,9 +6,11 @@ class JobCandidateService
   end
 
   def create(job_candidate_params)
-    job_candidate = JobCandidate.new(job_candidate_params)
-    job_candidate.score = score_service.call(job_candidate.job,
-                                             job_candidate.person)
+    job_candidate = JobCandidate.new job_candidate_params
+    if job_candidate.valid?
+      job_candidate.score = score_service.call(job_candidate.job,
+                                               job_candidate.person)
+    end
     job_candidate
   end
 end

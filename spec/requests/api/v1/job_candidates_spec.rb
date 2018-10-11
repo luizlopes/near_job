@@ -78,6 +78,9 @@ RSpec.describe Api::V1::JobCandidatesController do
   end
 
   describe 'POST /v1/candidaturas' do
+    let!(:link_from_a_to_b) { create :link }
+    let!(:distance_factor) { create :distance_factor }
+
     let(:pizzaiolo) { create :job, title: 'Pizzaiolo', level: 4 }
     let(:nico) { create :person, name: 'Nico Pomodoro' }
     let(:mama) { create :person, name: 'Mama Bruschetta' }

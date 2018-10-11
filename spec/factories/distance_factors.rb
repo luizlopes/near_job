@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :distance_factor do
-    initial 1
-    final 1
-    factor 1
+    initial 0
+    final 100
+    factor 15
   end
 end

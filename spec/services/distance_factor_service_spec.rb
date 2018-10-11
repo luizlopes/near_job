@@ -18,7 +18,7 @@ describe DistanceFactorService do
   end
 
   it 'get the distance factor for cost equals to 0' do
-    best_way_service = double(:best_way_service, find_lower_cost: 0)
+    best_way_service = double(:best_way_service, find_lower_distance: 0)
 
     distance_factor = DistanceFactorService.new(best_way_service)
                                            .call('A', 'B')
@@ -26,7 +26,7 @@ describe DistanceFactorService do
   end
 
   it 'get the distance factor for cost equals to 4' do
-    best_way_service = double(:best_way_service, find_lower_cost: 4)
+    best_way_service = double(:best_way_service, find_lower_distance: 4)
 
     distance_factor = DistanceFactorService.new(best_way_service)
                                            .call('A', 'B')
@@ -34,7 +34,7 @@ describe DistanceFactorService do
   end
 
   it 'get the distance factor for cost equals to 8' do
-    best_way_service = double(:best_way_service, find_lower_cost: 8)
+    best_way_service = double(:best_way_service, find_lower_distance: 8)
 
     distance_factor = DistanceFactorService.new(best_way_service)
                                            .call('A', 'B')
@@ -42,7 +42,7 @@ describe DistanceFactorService do
   end
 
   it 'get the distance factor for cost equals to 20' do
-    best_way_service = double(:best_way_service, find_lower_cost: 20)
+    best_way_service = double(:best_way_service, find_lower_distance: 20)
 
     distance_factor = DistanceFactorService.new(best_way_service)
                                            .call('A', 'B')
@@ -50,7 +50,7 @@ describe DistanceFactorService do
   end
 
   it 'get the distance factor for cost equals to 21' do
-    best_way_service = double(:best_way_service, find_lower_cost: 21)
+    best_way_service = double(:best_way_service, find_lower_distance: 21)
 
     distance_factor = DistanceFactorService.new(best_way_service)
                                            .call('A', 'B')
