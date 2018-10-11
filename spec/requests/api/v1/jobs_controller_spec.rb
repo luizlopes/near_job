@@ -57,8 +57,10 @@ RSpec.describe Api::V1::JobsController do
         expect(json_response[:detail]).to eq('Validation errors occurred')
         expect(json_response[:messages][:company][0]).to eq('can\'t be blank')
         expect(json_response[:messages][:title][0]).to eq('can\'t be blank')
-        expect(json_response[:messages][:description][0]).to eq('can\'t be blank')
-        expect(json_response[:messages][:localization][0]).to eq('can\'t be blank')
+        expect(json_response[:messages][:description][0]).to eq('can\'t be '\
+                                                                'blank')
+        expect(json_response[:messages][:localization][0]).to eq('can\'t be '\
+                                                                 'blank')
       end
     end
 
