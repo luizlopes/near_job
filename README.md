@@ -11,6 +11,7 @@
     - [Criando pessoas](#criando-pessoas)
     - [Acessando a documentação da API](#acessando-a-documenta%C3%A7%C3%A3o-da-api)
   - [Tecnologias](#tecnologias)
+  - [Funcionamento](#funcionamento)
   - [Testes e Cobertura](#testes-e-cobertura)
 
 # Near Job
@@ -117,6 +118,33 @@ RSpec: para os testes
 ApiPie: para gerar a documentação
 SimpleCov: para cobertura de testes
 Rubocop: para garantir a padronização do código
+
+## Funcionamento
+
+Para os cadastros de **vagas** e **pessoas**, para todos os campos de ambos, são tipo caractere, obrigatório e livre, apenas o valor do campo *nível* dos dois cadastros que deve ser inteiro e ter valores entre 1 e 5 (inclusivo) e também é obrigatório. Quando os valores dos campos não atenderem às regras, tanto para o cadastro de pessoas quanto para o de vagas, um erro de *bad request* com detalhes será retornado.
+
+Ao chamar os serviços *POST* para **vagas** ou para **pessoas**, será retornado os valores gravados nos campos de cada cadastro, além do campo **id**, que poderá ser usado para realizar candidaturas.
+
+Ao criar uma **candidatura**, os campos *id_vaga* e *id_pessoa* devem representar valores cadastrados previamente (referem-se aos ids dos cadastros anteriores), caso contrário, um erro de *bad request* com detalhes será retornado.
+
+Em caso de sucesso, será retornado uma resposta com dados da vaga e com o valor do **score** da candidatura preenchido.
+
+Conforme a definição, o **score** é o valor que representa o grau de compatibilidade da vaga com o candidato baseado nos critérios de localização e nível de ambos.
+
+O **score** é calculado tomando como base os valores de **fator de nível**, que podemos entender como *100 - 25 * | Nivel Candidato - Nivel Vaga |* e o **fator de distância**.
+
+O **fator de distância** possuí duas etapas para ser calculado: **cálculo do melhor caminho** e **descoberta do fator de distância**.
+
+O **cálculo do melhor caminho**, consiste na aplicação do algoritmo de Dijskstra, que busca o melhor caminho de um ponto a outro, recalculando sempre a partir do vizinho com menor distância. [Algoritmo de Dijkstra para cálculo do Caminho de Custo Mínimo](http://www.inf.ufsc.br/grafos/temas/custo-minimo/dijkstra.html) 
+
+O **fator de distância** consiste em uma tabela presente na base de dados de faixas de distancias (), onde cada faixa de distancias cadastrada possuí um fator, que representa o *fator de distância*.
+
+Baseado no funcionamento descrito acima, podemos chegar no valor do **score** através da fórmula *score = (fator de distância + fator de nível) / 2*.
+
+Poderá haver casos para o cálculo do melhor caminho onde o ponto de partida é igual ao ponto de chegada, nesses casos o **fator distância** será correspondente ao fator da faixa 0, que por padrão é igual a 100.
+
+### ***Ainda não implementado!***
+Poderá haver casos onde um caminho de um ponto a outro seja **inexistente** ou, melhor dizendo, partindo de ou buscando um ponto **inalcançável**. Nesses casos o valor do melhor caminho será igual a -1 (um negativo) e o **score** ficará com valor de -1 (um negativo).
 
 ## Testes e Cobertura
 
