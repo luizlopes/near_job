@@ -6,7 +6,7 @@ module Api
         param :profissao, String, 'Profissão', required: true
         param :localizacao, String, 'Localização do profissional',
               required: true
-        param :nivel, String, 'Nivel do profissional', required: true
+        param :nivel, Integer, 'Nivel do profissional', required: true
       end
 
       api :POST, '/v1/pessoas', 'Cria uma nova pessoa'

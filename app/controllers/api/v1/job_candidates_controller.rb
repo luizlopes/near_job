@@ -4,8 +4,8 @@ module Api
       before_action :find_job, only: %i[ranking]
 
       def_param_group :job_candidate_record do
-        param :id_vaga, Integer, 'Id da vaga'
-        param :id_pessoa, Integer, 'Id da pessoa'
+        param :id_vaga, Integer, 'Id da vaga', required: true
+        param :id_pessoa, Integer, 'Id da pessoa', required: true
       end
 
       api :GET, '/v1/vagas/:vaga_id/candidaturas/ranking',
