@@ -1,6 +1,4 @@
 class DistanceFactorService
-  attr_reader :best_way_service
-
   def initialize(best_way_service = BestWayService.new)
     @best_way_service = best_way_service
   end
@@ -10,10 +8,11 @@ class DistanceFactorService
     find_distance_to(lower_cost_distance).factor
   end
 
+  private
+
+  attr_reader :best_way_service
+
   def find_distance_to(distance)
-    distance_factor = DistanceFactor.where(':distance >= initial '\
-                                           'AND :distance <= final',
-                                           distance: distance)
-    distance_factor.first
+    DistanceFactor.where(':distance >= initial AND :distance <= final', distance: distance).first
   end
 end
