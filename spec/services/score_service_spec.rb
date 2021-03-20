@@ -1,31 +1,28 @@
 require 'rails_helper'
 
 describe ScoreService do
-  it 'returns the sum of level factor of 75 with distance factor of 25'\
-     ' and div by 2' do
-    a_job = build(:job)
-    a_person = build(:person)
-
-    level_factor = double(:level_factor, call: 75)
-    distance_factor = double(:distance_factor, call: 25)
-
-    score = ScoreService.new(level_factor, distance_factor)
-                        .call(a_job, a_person)
-
-    expect(score).to eq(50)
+  subject(:score_service_call) do
+    described_class.new(level_factor, distance_factor).call(a_job, a_person)
   end
 
-  it 'returns the sum of level factor of 100 with distance factor of 50'\
-     ' and div by 2' do
-    a_job = build(:job)
-    a_person = build(:person)
+  let(:a_job) { build(:job) }
+  let(:a_person) { build(:person) }
 
-    level_factor = double(:level_factor, call: 100)
-    distance_factor = double(:distance_factor, call: 50)
+  context 'when level factor equals 75 and distance factor equal 25' do
+    let(:level_factor) { double(:level_factor, call: 75) }
+    let(:distance_factor) { double(:distance_factor, call: 25) }
 
-    score = ScoreService.new(level_factor, distance_factor)
-                        .call(a_job, a_person)
+    it 'returns the sum divided by 2' do
+      is_expected.to eq(50)
+    end
+  end
 
-    expect(score).to eq(75)
+  context 'when level factor equals 100 and distance factor equal 50' do
+    let(:level_factor) { double(:level_factor, call: 100) }
+    let(:distance_factor) { double(:distance_factor, call: 50) }
+
+    it 'returns the sum divided by 2' do
+      is_expected.to eq(75)
+    end
   end
 end
