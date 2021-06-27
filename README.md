@@ -1,3 +1,5 @@
+![Ruby](https://github.com/luizlopes/near_job/workflows/Ruby/badge.svg)
+
 # README
 
 - [README](#readme)
