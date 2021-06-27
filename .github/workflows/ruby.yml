@@ -9,7 +9,7 @@ name: Ruby
 
 on:
   push:
-    branches: [ master, ci/github_actions_workflow ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
