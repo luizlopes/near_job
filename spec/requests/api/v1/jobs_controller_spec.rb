@@ -14,7 +14,7 @@ RSpec.describe Api::V1::JobsController do
       end
 
       before do
-        post '/v1/vagas', params: job_pedreiro.to_json
+        post '/v1/vagas', params: job_pedreiro
       end
 
       it 'returns status code created' do

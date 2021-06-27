@@ -1,5 +1,6 @@
 class BestWayService
   attr_reader :estimates_service
+
   def initialize(estimates_service = EstimatesService.new)
     @estimates_service = estimates_service
   end

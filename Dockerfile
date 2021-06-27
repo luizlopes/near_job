@@ -16,6 +16,8 @@ RUN export LC_ALL="en_US.utf8"
 
 RUN mkdir -p /var/www/near_job
 
+EXPOSE 9000
+
 WORKDIR /var/www/near_job
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
