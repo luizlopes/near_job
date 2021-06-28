@@ -1,9 +1,12 @@
 require 'rails_helper'
 
-describe DistanceFactorService do
+describe Scores::DistanceScoreService do
   subject(:distance_factor) do
-    described_class.new(best_way_service).call('A', 'B')
+    described_class.call(job: a_job, person: a_person, best_way_service: best_way_service)
   end
+
+  let(:a_job) { build(:job, localization: 'A') }
+  let(:a_person) { build(:person, localization: 'B') }
 
   before do
     create :distance_factor, initial: 0, final: 5, factor: 100
@@ -18,32 +21,32 @@ describe DistanceFactorService do
   context 'when the distance factor for cost equals to 0' do
     let(:lower_distance) { 0 }
 
-    it 'must return 100' do
-      expect(distance_factor).to eq(100)
+    it 'must return 50' do
+      expect(distance_factor).to eq(50)
     end
   end
 
   context 'when the distance factor for cost equals to 4' do
     let(:lower_distance) { 4 }
 
-    it 'must return 100' do
-      expect(distance_factor).to eq(100)
+    it 'must return 50' do
+      expect(distance_factor).to eq(50)
     end
   end
 
   context 'when the distance factor for cost equals to 8' do
     let(:lower_distance) { 8 }
 
-    it 'must return 75' do
-      expect(distance_factor).to eq(75)
+    it 'must return 37' do
+      expect(distance_factor).to eq(37)
     end
   end
 
   context 'when the distance factor for cost equals to 20' do
     let(:lower_distance) { 20 }
 
-    it 'must return 25' do
-      expect(distance_factor).to eq(25)
+    it 'must return 12' do
+      expect(distance_factor).to eq(12)
     end
   end
 

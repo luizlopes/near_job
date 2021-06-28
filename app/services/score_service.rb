@@ -1,18 +1,9 @@
 class ScoreService
-  def initialize(level_factor_service = LevelFactorService,
-                 distance_factor_service = DistanceFactorService.new)
-    @level_factor_service = level_factor_service
-    @distance_factor_service = distance_factor_service
+  def initialize(score_services: [Scores::DistanceScoreService, Scores::LevelScoreService])
+    @score_services = score_services
   end
 
   def call(job, person)
-    level_factor = level_factor_service.call(job.level, person.level)
-    distance_factor = distance_factor_service.call(job.localization, person.localization)
-
-    (level_factor + distance_factor) / 2
+    @score_services.map { |score_service| score_service.call(job: job, person: person) }.reduce(&:+)
   end
-
-  private
-
-  attr_reader :level_factor_service, :distance_factor_service
 end
