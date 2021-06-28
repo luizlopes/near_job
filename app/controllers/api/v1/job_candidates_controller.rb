@@ -23,6 +23,7 @@ module Api
                  serializer: RankingSerializer
           return
         end
+
         render_json_validation_error job_candidate, :validation_error
       end
 

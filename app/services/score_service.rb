@@ -1,5 +1,5 @@
 class ScoreService
-  def initialize(score_services: [Scores::DistanceScoreService, Scores::LevelScoreService])
+  def initialize(score_services:)
     @score_services = score_services
   end
 
