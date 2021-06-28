@@ -17,12 +17,13 @@ module Api
       api :POST, '/v1/candidaturas', 'Cria uma nova candidatura'
       param_group :job_candidate_record
       def create
-        job_candidate = JobCandidateService.new.create job_candidate_params
-        if job_candidate.save job_candidate
+        job_candidate = JobCandidateService.new.create(job_candidate_params)
+        if job_candidate.save(job_candidate)
           render json: job_candidate, status: :created,
                  serializer: RankingSerializer
           return
         end
+
         render_json_validation_error job_candidate, :validation_error
       end
 

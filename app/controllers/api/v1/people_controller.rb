@@ -7,6 +7,7 @@ module Api
         param :localizacao, String, 'Localização do profissional',
               required: true
         param :nivel, Integer, 'Nivel do profissional', required: true
+        param :experiencia, String, 'Experiencia profissional'
       end
 
       api :POST, '/v1/pessoas', 'Cria uma nova pessoa'
@@ -23,7 +24,7 @@ module Api
       private
 
       def person_params
-        params.permit(:nome, :profissao, :localizacao, :nivel)
+        params.permit(:nome, :profissao, :localizacao, :nivel, :experiencia)
       end
     end
   end

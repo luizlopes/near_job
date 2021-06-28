@@ -3,17 +3,18 @@ require 'rails_helper'
 RSpec.describe Api::V1::PeopleController do
   describe 'POST /v1/pessoas' do
     context 'sucessfully' do
-      let(:luiz) do
+      let(:person_params) do
         {
           nome: 'Luiz',
           profissao: 'Pedreiro',
           localizacao: 'A',
-          nivel: 5
+          nivel: 5,
+          experiencia: 'Ruby'
         }
       end
 
       before do
-        post '/v1/pessoas', params: luiz
+        post '/v1/pessoas', params: person_params
       end
 
       it 'returns status code created' do
@@ -22,11 +23,11 @@ RSpec.describe Api::V1::PeopleController do
 
       it 'returns person details' do
         person = Person.last
-        expect(json_response[:id]).to eq(person.id)
-        expect(json_response[:nome]).to eq(person.name)
-        expect(json_response[:profissao]).to eq(person.career)
-        expect(json_response[:localizacao]).to eq(person.localization)
-        expect(json_response[:nivel]).to eq(person.level)
+        expect(person_params[:nome]).to eq(person.name)
+        expect(person_params[:profissao]).to eq(person.career)
+        expect(person_params[:localizacao]).to eq(person.localization)
+        expect(person_params[:nivel]).to eq(person.level)
+        expect(person_params[:experiencia]).to eq(person.professional_background)
       end
     end
 
