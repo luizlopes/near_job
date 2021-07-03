@@ -16,7 +16,6 @@
 
 require 'simplecov'
 
-# SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start 'rails' do
   add_filter 'application_mailer.rb'
   add_filter 'application_job.rb'

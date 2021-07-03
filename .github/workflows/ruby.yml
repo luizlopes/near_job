@@ -29,9 +29,9 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: false # runs 'bundle install' and caches installed gems automatically
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
-      run: bundle install && bin/rails db:migrate && bundle exec rake
+      run: bundle exec rake # run: bundle install && bin/rails db:migrate && bundle exec rake
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RAILS_ENV: test
