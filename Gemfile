@@ -51,8 +51,10 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'simplecov', '~> 0.18'
+  gem "simplecov-lcov", "~> 0.8.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+

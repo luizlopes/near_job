@@ -1,4 +1,5 @@
 ![Ruby](https://github.com/luizlopes/near_job/workflows/Ruby/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/luizlopes/near_job/badge.svg?branch=master)](https://coveralls.io/github/luizlopes/near_job?branch=master)
 
 # README
 
