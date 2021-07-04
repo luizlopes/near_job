@@ -3,19 +3,25 @@
 
 # README
 
-- [README](#readme)
 - [Near Job](#near-job)
-  - [Woorking Docker](#rodando-sem-docker)
-  - [Rodando com Docker](#rodando-com-docker)
-  - [Utilizando](#utilizando)
-    - [Criando um candidato](#criando-um-candidato)
-    - [Buscando ranking de candidatos à vaga](#buscando-ranking-de-candidatos-%C3%A0-vaga)
-    - [Criando vagas](#criando-vagas)
-    - [Criando pessoas](#criando-pessoas)
-    - [Acessando a documentação da API](#acessando-a-documenta%C3%A7%C3%A3o-da-api)
-  - [Tecnologias](#tecnologias)
-  - [Funcionamento](#funcionamento)
-  - [Testes e Cobertura](#testes-e-cobertura)
+  * [Running](#running)
+    + [Working without Docker](#working-without-docker)
+    + [Working with Docker](#working-with-docker)
+  * [The data](#the-data)
+    + [links (neighbors distances)](#links--neighbors-distances-)
+    + [distance factors (the factor is used for score calculation)](#distance-factors--the-factor-is-used-for-score-calculation-)
+    + [jobs (job vacancies)](#jobs--job-vacancies-)
+    + [people (people)](#people--people-)
+  * [Using](#using)
+    + [Applying to a job vacancy](#applying-to-a-job-vacancy)
+    + [Ranking job applicants](#ranking-job-applicants)
+    + [Adding job vacancies](#adding-job-vacancies)
+    + [Adding people pessoas](#adding-people-pessoas)
+  * [API doc](#api-doc)
+  * [API stack](#api-stack)
+  * [How it works](#how-it-works)
+  * [TODOs](#todos)
+  * [Tests and Coverage](#tests-and-coverage)
 
 # Near Job
 API for people registration, job vacancies and job applicants with score. The API also offers a service for ranking job applications by level, location and professional background matching (new).
@@ -137,6 +143,6 @@ This API was developed with Ruby 2.5.1 and Rails 5.2.5, and the gems:
 ## TODOs
   *#TODO*
 
-## Testes e Cobertura
+## Tests and Coverage
 
 You can see the tests coverage on the top of this README
