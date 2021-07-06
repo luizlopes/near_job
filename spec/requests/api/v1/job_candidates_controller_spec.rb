@@ -2,60 +2,64 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::JobCandidatesController do
   describe 'GET /v1/vagas/:vaga_id/candidaturas/ranking' do
-    let!(:pizzaiolo) { create :job, title: 'Pizzaiolo', level: 4 }
+    let(:pizzaiolo) { create(:job, title: 'Pizzaiolo', description: 'SUPER-MASSA', level: 4, localization: 'Z') }
 
-    let!(:nico) { create :person, name: 'Nico Pomodoro' }
-    let!(:silvio) { create :person, name: 'Silvio Milanesa' }
-    let!(:catarina) { create :person, name: 'Catarina' }
+    let(:nico) { create(:person, name: 'Nico Pomodoro', localization: 'A') }
+    let(:silvio) { create(:person, name: 'Silvio Milanesa', localization: 'C', professional_background: 'super-massa') }
+    let(:catarina) { create(:person, name: 'Catarina', localization: 'B') }
 
-    let!(:nico_pizzaiolo) do
-      create :job_candidate, job: pizzaiolo, person: nico, score: 30
-    end
+    before do
+      create(:link, source: 'A', target: 'Z', distance: 20)
+      create(:link, source: 'B', target: 'Z', distance: 15)
+      create(:link, source: 'C', target: 'Z', distance: 10)
 
-    let!(:silvio_pizzaiolo) do
-      create :job_candidate, job: pizzaiolo, person: silvio, score: 100
-    end
+      create(:distance_factor, initial: 0, final: 10, factor: 100)
+      create(:distance_factor, initial: 11, final: 15, factor: 50)
+      create(:distance_factor, initial: 16, final: 20, factor: 25)
+      create(:distance_factor, initial: 21, final: 999, factor: 0)
 
-    let!(:catarina_pizzaiolo) do
-      create :job_candidate, job: pizzaiolo, person: catarina, score: 80
+      post '/v1/candidaturas', params: { "id_vaga": pizzaiolo.id, "id_pessoa": nico.id }
+      post '/v1/candidaturas', params: { "id_vaga": pizzaiolo.id, "id_pessoa": silvio.id }
+      post '/v1/candidaturas', params: { "id_vaga": pizzaiolo.id, "id_pessoa": catarina.id }
     end
 
     context 'sucessfully' do
       before do
-        get "/v1/vagas/#{pizzaiolo.id}/candidaturas/ranking",
-            headers: { 'Accept': 'application/vnd' }
+        get "/v1/vagas/#{pizzaiolo.id}/candidaturas/ranking", headers: { 'Accept': 'application/vnd' }
       end
 
-      it 'returns status code 200' do
-        expect(response).to have_http_status(:success)
-      end
+      context 'without professional background' do
+        it 'returns status code 200' do
+          expect(response).to have_http_status(:success)
+        end
 
-      it 'returns all candidates' do
-        expect(json_response.size).to eq(3)
-      end
+        it 'returns all candidates' do
+          expect(json_response.size).to eq(3)
+        end
 
-      it 'returns first candidate with highest score' do
-        expect(json_response[0][:nome]).to eq(silvio.name)
-        expect(json_response[0][:profissao]).to eq(silvio.career)
-        expect(json_response[0][:localizacao]).to eq(silvio.localization)
-        expect(json_response[0][:nivel]).to eq(3)
-        expect(json_response[0][:score]).to eq(silvio_pizzaiolo.score)
-      end
+        it 'returns first candidate with highest score' do
+          expect(json_response[0][:nome]).to eq(silvio.name)
+          expect(json_response[0][:profissao]).to eq(silvio.career)
+          expect(json_response[0][:localizacao]).to eq(silvio.localization)
+          expect(json_response[0][:nivel]).to eq(3)
+          expect(json_response[0][:score]).to eq(137)
+        end
 
-      it 'returns second candidate with highest score' do
-        expect(json_response[1][:nome]).to eq(catarina.name)
-        expect(json_response[1][:profissao]).to eq(catarina.career)
-        expect(json_response[1][:localizacao]).to eq(catarina.localization)
-        expect(json_response[1][:nivel]).to eq(3)
-        expect(json_response[1][:score]).to eq(catarina_pizzaiolo.score)
-      end
+        it 'returns second candidate with highest score' do
+          expect(json_response[1][:nome]).to eq(catarina.name)
+          expect(json_response[1][:profissao]).to eq(catarina.career)
+          expect(json_response[1][:localizacao]).to eq(catarina.localization)
+          expect(json_response[1][:nivel]).to eq(3)
+          expect(json_response[1][:score]).to eq(62)
+        end
 
-      it 'returns third candidate with highest score' do
-        expect(json_response[2][:nome]).to eq(nico.name)
-        expect(json_response[2][:profissao]).to eq(nico.career)
-        expect(json_response[2][:localizacao]).to eq(nico.localization)
-        expect(json_response[2][:nivel]).to eq(3)
-        expect(json_response[2][:score]).to eq(nico_pizzaiolo.score)
+        it 'returns third candidate with highest score' do
+          expect(json_response[2][:nome]).to eq(nico.name)
+          expect(json_response[2][:profissao]).to eq(nico.career)
+          expect(json_response[2][:localizacao]).to eq(nico.localization)
+          expect(json_response[2][:nivel]).to eq(3)
+          expect(json_response[2][:score]).to eq(49)
+        end
       end
     end
 
