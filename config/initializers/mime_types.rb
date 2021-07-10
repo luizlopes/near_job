@@ -2,5 +2,5 @@
 
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf
-MEDIA_TYPE = 'application/vnd.api+json'.freeze
-Mime::Type.register(MEDIA_TYPE, :jsonapi)
+# MEDIA_TYPE = 'application/vnd.api+json'.freeze
+# Mime::Type.register(MEDIA_TYPE, :jsonapi)
