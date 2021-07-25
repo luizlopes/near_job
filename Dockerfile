@@ -1,19 +1,14 @@
-FROM ruby:2.5.1
+FROM ruby:2.6.8-alpine
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-RUN apt-get update -qq
-RUN apt-get install -y --no-install-recommends vim \
-      nodejs \
-      yarn \
-      sqlite3 \
-      locales
-
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-RUN locale-gen
-RUN export LC_ALL="en_US.utf8"
+RUN apk update \
+      && apk upgrade \
+      && apk add --update \
+      tzdata \
+      sqlite-dev \
+      git \
+      linux-headers \
+      build-base \
+      && rm -rf /var/cache/apk/*
 
 RUN mkdir -p /var/www/near_job
 
