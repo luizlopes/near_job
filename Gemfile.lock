@@ -61,6 +61,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     apipie-rails (0.5.10)
       rails (>= 4.1)
     ast (2.4.0)
@@ -86,6 +88,8 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.1)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
     jsonapi-renderer (0.2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -110,6 +114,7 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.2)
+    public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -164,6 +169,15 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    rswag-api (2.4.0)
+      railties (>= 3.1, < 7.0)
+    rswag-specs (2.4.0)
+      activesupport (>= 3.1, < 7.0)
+      json-schema (~> 2.2)
+      railties (>= 3.1, < 7.0)
+    rswag-ui (2.4.0)
+      actionpack (>= 3.1, < 7.0)
+      railties (>= 3.1, < 7.0)
     rubocop (0.58.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -215,6 +229,9 @@ DEPENDENCIES
   puma (~> 4.3)
   rails (~> 6.0.0)
   rspec-rails
+  rswag-api
+  rswag-specs
+  rswag-ui
   rubocop
   simplecov (~> 0.18)
   simplecov-lcov (~> 0.8.0)
@@ -224,7 +241,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.8p205
 
 BUNDLED WITH
-   1.16.6
+   1.17.2
