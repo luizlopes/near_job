@@ -1,0 +1,56 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/vagas/{vaga_id}/candidaturas/ranking":
+    get:
+      summary: ranking job_candidate
+      parameters:
+      - name: vaga_id
+        in: path
+        description: vaga_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              example:
+              - nome: Nico Pomodoro
+                profissao: Chef Pizzaiolo
+                localizacao: A
+                nivel: 3
+                score: 99
+  "/v1/candidaturas":
+    post:
+      summary: create job_candidate
+      parameters: []
+      responses:
+        '201':
+          description: successful
+        '400':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_vaga:
+                  type: integer
+                  example: 1
+                id_pessoa:
+                  type: integer
+                  example: 1
+              required:
+              - id_vaga
+              - id_pessoa
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:9000
